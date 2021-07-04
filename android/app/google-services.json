@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "951868577029",
-    "firebase_url": "https://todo-example-1a44a-default-rtdb.firebaseio.com",
-    "project_id": "todo-example-1a44a",
-    "storage_bucket": "todo-example-1a44a.appspot.com"
+    "project_number": "1070284543192",
+    "project_id": "todo-2fbb1",
+    "storage_bucket": "todo-2fbb1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:951868577029:android:0028fd4c6025f85c2f136c",
+        "mobilesdk_app_id": "1:1070284543192:android:317bef730070b0d57873ad",
         "android_client_info": {
-          "package_name": "com.demo.morphosis"
+          "package_name": "com.smartx_demo_test.morphosis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "951868577029-vovgvfbh8sjpakne7b9cb7fk55tv7715.apps.googleusercontent.com",
+          "client_id": "1070284543192-p1ar0dqehgms2mdaveoalpmp8nbebcs1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartx_demo_test.morphosis",
+            "certificate_hash": "03f3c7522e6db1d30b17b018bfeb1a705342fb81"
+          }
+        },
+        {
+          "client_id": "1070284543192-svh3n41r4nn2hbq5hm7o68u5gns9jdg7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyATT8qwG2Of_NAViYJeFWzDH2w2v_uEQsg"
+          "current_key": "AIzaSyC3K7i5lZ0LU7v3L4DfkDF1pAXVZceH7-g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "951868577029-vovgvfbh8sjpakne7b9cb7fk55tv7715.apps.googleusercontent.com",
+              "client_id": "1070284543192-svh3n41r4nn2hbq5hm7o68u5gns9jdg7.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "951868577029-mjn0ejbu8937ioiric9uloask01b734k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.demo.morphosis"
-              }
             }
           ]
         }

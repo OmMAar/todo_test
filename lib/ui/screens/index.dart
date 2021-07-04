@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:morphosis_flutter_demo/non_ui/repo/firebase_manager.dart';
-import 'package:morphosis_flutter_demo/ui/screens/home.dart';
+import 'package:morphosis_flutter_demo/data/network/weather/weather_api.dart';
+import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
+import 'package:morphosis_flutter_demo/data/repo/firestore_service_manager.dart';
+import 'package:morphosis_flutter_demo/di/components/service_locator.dart';
+import 'package:morphosis_flutter_demo/ui/home/page/home.dart';
 import 'package:morphosis_flutter_demo/ui/screens/tasks.dart';
 
 class IndexPage extends StatefulWidget {
@@ -23,12 +26,12 @@ class _IndexPageState extends State<IndexPage> {
       HomePage(),
       TasksPage(
         title: 'All Tasks',
-        tasks: FirebaseManager.shared.tasks,
+        tasks: getIt<FirebaseManager>().tasks,
       ),
       TasksPage(
         title: 'Completed Tasks',
         tasks:
-            FirebaseManager.shared.tasks.where((t) => t.isCompleted).toList(),
+        getIt<FirebaseManager>().tasks.where((t) => t.isCompleted).toList(),
       )
     ];
 

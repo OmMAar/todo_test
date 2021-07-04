@@ -1,0 +1,32 @@
+{
+  "login_start": "Below are list of strings for login da ",
+  "login_et_user_email": "Brugernavn",
+  "login_et_user_password": "Adgangskode",
+  "login_btn_forgot_password": "Glemt adgangskode?",
+  "login_btn_sign_in": "Log ind",
+  "login_error_fill_fields": "Udfyld venligst alle felterne",
+  "login_end": "------------------------------------------------------------------------------------",
+
+  "home_start": "Below are list of strings for home",
+  "home_tv_posts": "Indlæg",
+  "home_tv_error": "Fejl",
+  "home_tv_no_post_found": "Ingen indlæg fundet",
+  "home_tv_choose_language": "Vælg sprog",
+  "home_end": "-------------------------------------------------------------------------------------",
+
+  "app_name": "الطقس",
+  "home": "الرئيسية",
+  "retry": "إعادة المحاولة",
+  "cancel": "إلغاء",
+  "loading": "جارِ التحميل...",
+  "empty": "لا يوجد بيانات",
+  "connection_err": "تعذر الاتصال بالانترنت",
+  "unexpected_err": "لقد حدث خطأ غير متوقع، سنعمل على إصلاحه بأسرع وقت ممكن.",
+  "exit_warning": "انقر مرة أخرى للخروج",
+  "terms_and_conditions": "الشروط والأحكام",
+  "txt_details_clear": "يوم \n جميل \n للمشي",
+  "txt_details_rain": "إنها \n تمطر \n الآن",
+  "txt_details_cloudy": "الجو \n غائم \n الآن",
+  "humidity": "الرطوبة",
+  "wind": "الريح"
+}

@@ -1,0 +1,32 @@
+{
+  "login_start": "Below are list of strings for login es ",
+  "login_et_user_email": "Ingrese el correo electrónico del usuario",
+  "login_et_user_password": "Introducir la contraseña",
+  "login_btn_forgot_password": "¿Se te olvidó tu contraseña",
+  "login_btn_sign_in": "Registrarse",
+  "login_error_fill_fields": "Por favor complete todos los campos e",
+  "login_end": "------------------------------------------------------------------------------------",
+
+  "home_start": "Below are list of strings for home",
+  "home_tv_posts": "Publicaciones",
+  "home_tv_error": "Error",
+  "home_tv_no_post_found": "No se han encontrado publicaciones",
+  "home_tv_choose_language": "Elige lengua",
+  "home_end": "-------------------------------------------------------------------------------------",
+
+  "app_name": "weather",
+  "home": "Home",
+  "retry": "Retry",
+  "cancel": "Cancel",
+  "loading": "Loading...",
+  "empty": "No Data",
+  "connection_err": "!Ooops ,\n Connection Failure",
+  "unexpected_err": "Unexpected error occurred, we will fix ASAP.",
+  "exit_warning": "Click back again to exit",
+  "terms_and_conditions": "Terms and Conditions",
+  "txt_details_clear": "Sunny \nday \nwalk",
+  "txt_details_rain": "It's \nraining \nnow",
+  "txt_details_cloudy": "It's \ncloudy \nnow",
+  "humidity": "Humidity",
+  "wind": "Wind"
+}

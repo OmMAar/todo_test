@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.demo.morphosis</string>
+	<string>com.smartx_demo_test.morphosis</string>
 	<key>PROJECT_ID</key>
 	<string>todo-example-1a44a</string>
 	<key>STORAGE_BUCKET</key>
