@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
 import 'package:morphosis_flutter_demo/ui/my_app.dart';
-import 'package:morphosis_flutter_demo/ui/screens/index.dart';
+import 'package:morphosis_flutter_demo/ui/index/index.dart';
 import 'package:morphosis_flutter_demo/ui/widgets/error_widget.dart';
 import 'package:uuid/uuid.dart';
 

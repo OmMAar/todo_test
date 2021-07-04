@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:morphosis_flutter_demo/data/network/weather/weather_api.dart';
 import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
-import 'package:morphosis_flutter_demo/data/repo/firestore_service_manager.dart';
 import 'package:morphosis_flutter_demo/di/components/service_locator.dart';
 import 'package:morphosis_flutter_demo/ui/home/page/home.dart';
-import 'package:morphosis_flutter_demo/ui/screens/tasks.dart';
+import 'package:morphosis_flutter_demo/ui/task/tasks.dart';
 
 class IndexPage extends StatefulWidget {
   @override

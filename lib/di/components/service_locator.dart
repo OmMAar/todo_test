@@ -4,7 +4,6 @@ import 'package:morphosis_flutter_demo/data/network/rest_client.dart';
 import 'package:morphosis_flutter_demo/data/network/task/task_firestore.dart';
 import 'package:morphosis_flutter_demo/data/network/weather/weather_api.dart';
 import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
-import 'package:morphosis_flutter_demo/data/repo/firestore_service_manager.dart';
 import 'package:morphosis_flutter_demo/data/repository.dart';
 import 'package:morphosis_flutter_demo/data/sharedpref/shared_preference_helper.dart';
 import 'package:morphosis_flutter_demo/data/task_repository.dart';

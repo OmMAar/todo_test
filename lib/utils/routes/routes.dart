@@ -1,6 +1,6 @@
 import 'package:morphosis_flutter_demo/ui/home/page/home.dart';
-import 'package:morphosis_flutter_demo/ui/screens/index.dart';
-import 'package:morphosis_flutter_demo/ui/screens/task.dart';
+import 'package:morphosis_flutter_demo/ui/index/index.dart';
+import 'package:morphosis_flutter_demo/ui/task/task.dart';
 import 'package:morphosis_flutter_demo/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 
