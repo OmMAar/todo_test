@@ -9,4 +9,8 @@ class DBConstants {
 
   // Fields
   static const FIELD_ID = 'id';
+
+
+  static const FIELD_TITLE = 'title';
+  static const FIELD_BODY = 'body';
 }

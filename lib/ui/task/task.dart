@@ -1,10 +1,12 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:morphosis_flutter_demo/blocs/task/task_bloc.dart';
+import 'package:morphosis_flutter_demo/constants/app_styles.dart';
 import 'package:morphosis_flutter_demo/constants/colors.dart';
 import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
 import 'package:morphosis_flutter_demo/di/components/service_locator.dart';
@@ -22,22 +24,26 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
-
   static const double _padding = 16;
 
   Task? task;
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
+  bool isCompleted = false;
 
   var _bloc = TaskBloc();
+
   void init() {
-    if (task == null) {
+    if (widget.task == null) {
       task = Task();
       _titleController = TextEditingController();
       _descriptionController = TextEditingController();
     } else {
-      _titleController = TextEditingController(text: task!.title);
-      _descriptionController = TextEditingController(text: task!.description);
+      _titleController = TextEditingController(text: widget.task!.title);
+      _descriptionController =
+          TextEditingController(text: widget.task!.description);
+      isCompleted = widget.task!.isCompleted;
+      task = widget.task!;
     }
   }
 
@@ -52,17 +58,35 @@ class _TaskPageState extends State<TaskPage> {
 
     // getIt<FirebaseManager>().addTask(task!);
 
-    var task = Task();
-    task.title = _titleController.text;
-    task.description = _descriptionController.text;
+    // var task = Task();
+    task!.title = _titleController.text;
+    task!.description = _descriptionController.text;
+    if (isCompleted)
+      task!.completedAt = DateTime.now();
+    else
+      task!.completedAt = null;
     // task.id = uuid.v4();
 
-
-    _bloc.add(TaskEvent(task: task));
+    _bloc.add(AddTaskEvent(task: task!));
 
     //  Navigator.of(context).pop();
   }
 
+  void _edit(BuildContext context) {
+    //TODO implement edit to firestore
+
+    task!.title = _titleController.text;
+    task!.description = _descriptionController.text;
+    if (isCompleted)
+      task!.completedAt = DateTime.now();
+    else
+      task!.completedAt = null;
+    // task.id = uuid.v4();
+
+    _bloc.add(EditTaskEvent(task: task!));
+
+    //  Navigator.of(context).pop();
+  }
 
   // General Methods:-----------------------------------------------------------
   _showErrorMessage(String message) {
@@ -85,12 +109,15 @@ class _TaskPageState extends State<TaskPage> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.task == null ? 'New Task' : 'Edit Task'),
+        title: Text(
+          widget.task == null ? 'New Task' : 'Edit Task',
+          style: AppStyles.text20Style.copyWith(color: AppColors.whiteColor),
+        ),
+        brightness: Brightness.dark,
       ),
       body: SafeArea(
         child: BlocListener<TaskBloc, TaskState>(
@@ -101,7 +128,6 @@ class _TaskPageState extends State<TaskPage> {
               Navigator.of(context).pop();
             }
             if (state is TaskFailure) {
-
               _showErrorMessage(state.errorMessage);
               // final error = state.error;
               // if (error is ConnectionError) {
@@ -115,8 +141,8 @@ class _TaskPageState extends State<TaskPage> {
           },
           child: BlocBuilder<TaskBloc, TaskState>(
               bloc: _bloc,
-              builder: (context, state)  {
-                return  ModalProgressHUD(
+              builder: (context, state) {
+                return ModalProgressHUD(
                   inAsyncCall: state is TaskLoading,
                   color: AppColors.primaryColor,
                   opacity: 0.2,
@@ -150,10 +176,11 @@ class _TaskPageState extends State<TaskPage> {
                           children: [
                             Text('Completed ?'),
                             CupertinoSwitch(
-                              value: false,
-                              onChanged: (_) {
+                              value: isCompleted,
+                              onChanged: (value) {
                                 setState(() {
                                   task!.toggleComplete();
+                                  isCompleted = value;
                                 });
                               },
                             ),
@@ -161,7 +188,9 @@ class _TaskPageState extends State<TaskPage> {
                         ),
                         Spacer(),
                         ElevatedButton(
-                          onPressed: () => _save(context),
+                          onPressed: () => widget.task != null
+                              ? _edit(context)
+                              : _save(context),
                           child: Container(
                             width: double.infinity,
                             child: Center(child: Text('Create')),
@@ -171,169 +200,9 @@ class _TaskPageState extends State<TaskPage> {
                     ),
                   ),
                 );
-              }
-          ),
+              }),
         ),
       ),
     );
-  }
-}
-
-class _TaskForm extends StatefulWidget {
-  _TaskForm(this.task);
-
-  final Task? task;
-  @override
-  __TaskFormState createState() => __TaskFormState(task);
-}
-
-class __TaskFormState extends State<_TaskForm> {
-  static const double _padding = 16;
-
-  __TaskFormState(this.task);
-
-  Task? task;
- late TextEditingController _titleController;
-  late TextEditingController _descriptionController;
-
-   var _bloc = TaskBloc();
-  void init() {
-    if (task == null) {
-      task = Task();
-      _titleController = TextEditingController();
-      _descriptionController = TextEditingController();
-    } else {
-      _titleController = TextEditingController(text: task!.title);
-      _descriptionController = TextEditingController(text: task!.description);
-    }
-  }
-
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  void _save(BuildContext context) {
-    //TODO implement save to firestore
-
-    // getIt<FirebaseManager>().addTask(task!);
-
-    var task = Task();
-    task.title = _titleController.text;
-    task.description = _descriptionController.text;
-    task.id = uuid.v4();
-
-
-    _bloc.add(TaskEvent(task: task));
-
-  //  Navigator.of(context).pop();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocListener<TaskBloc, TaskState>(
-        listener: (context, state) async {
-          if (state is TaskSuccess) {
-            // result = state.result;
-            Navigator.of(context).pop();
-          }
-          if (state is TaskFailure) {
-
-            _showErrorMessage(state.errorMessage);
-            // final error = state.error;
-            // if (error is ConnectionError) {
-            //   ErrorViewerGet.showConnectionError(context, state.callback!);
-            // } else if (error is CustomError) {
-            //   ErrorViewerGet.showCustomError(context, error.message!);
-            // } else {
-            //   ErrorViewerGet.showUnexpectedError(context);
-            // }
-          }
-        },
-        child: BlocBuilder<TaskBloc, TaskState>(
-            bloc: _bloc,
-            builder: (context, state)  {
-            return  ModalProgressHUD(
-              inAsyncCall: state is TaskLoading,
-              color: AppColors.primaryColor,
-              opacity: 0.2,
-              progressIndicator: SpinKitCircle(
-                color: AppColors.primaryColor,
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(_padding),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Title',
-                      ),
-                    ),
-                    SizedBox(height: _padding),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Description',
-                      ),
-                      minLines: 5,
-                      maxLines: 10,
-                    ),
-                    SizedBox(height: _padding),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Completed ?'),
-                        CupertinoSwitch(
-                          value: task!.isCompleted,
-                          onChanged: (_) {
-                            setState(() {
-                              task!.toggleComplete();
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      onPressed: () => _save(context),
-                      child: Container(
-                        width: double.infinity,
-                        child: Center(child: Text(task!.isNew ? 'Create' : 'Update')),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            );
-          }
-        ),
-      ),
-    );
-  }
-
-  // General Methods:-----------------------------------------------------------
-  _showErrorMessage(String message) {
-    Future.delayed(Duration(milliseconds: 0), () {
-      if (message.isNotEmpty) {
-        FlushbarHelper.createError(
-          message: message,
-          title: AppLocalizations.of(context).translate('home_tv_error'),
-          duration: Duration(seconds: 3),
-        )..show(context);
-      }
-    });
-
-    return SizedBox.shrink();
-  }
-
-  @override
-  void dispose() {
-    _bloc.close();
-    super.dispose();
   }
 }

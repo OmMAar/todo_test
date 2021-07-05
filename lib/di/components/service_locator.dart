@@ -1,10 +1,11 @@
-import 'package:morphosis_flutter_demo/data/local/datasources/weather/weather_datasource.dart';
+import 'package:morphosis_flutter_demo/data/app_repository.dart';
+import 'package:morphosis_flutter_demo/data/local/datasources/post/post_datasource.dart';
 import 'package:morphosis_flutter_demo/data/network/dio_client.dart';
+import 'package:morphosis_flutter_demo/data/network/post/post_api.dart';
 import 'package:morphosis_flutter_demo/data/network/rest_client.dart';
 import 'package:morphosis_flutter_demo/data/network/task/task_firestore.dart';
-import 'package:morphosis_flutter_demo/data/network/weather/weather_api.dart';
+import 'package:morphosis_flutter_demo/data/post_repository.dart';
 import 'package:morphosis_flutter_demo/data/repo/firebase_manager.dart';
-import 'package:morphosis_flutter_demo/data/repository.dart';
 import 'package:morphosis_flutter_demo/data/sharedpref/shared_preference_helper.dart';
 import 'package:morphosis_flutter_demo/data/task_repository.dart';
 import 'package:morphosis_flutter_demo/di/module/local_module.dart';
@@ -37,19 +38,24 @@ Future<void> setupLocator() async {
   // getIt.registerFactory(() => FirebaseManager());
   getIt.registerSingleton(TaskFireStore());
   // api's:---------------------------------------------------------------------
-  getIt.registerSingleton(WeatherApi(getIt<DioClient>(), getIt<RestClient>()));
+  getIt.registerSingleton(PostApi(getIt<DioClient>(), getIt<RestClient>()));
 
   // data sources
-  getIt.registerSingleton(WeatherDataSource(await getIt.getAsync<Database>()));
+  getIt.registerSingleton(PostDataSource(await getIt.getAsync<Database>()));
 
 
   getIt.registerLazySingleton(() => FirebaseManager());
 
-  // repository:----------------------------------------------------------------
-  getIt.registerSingleton(Repository(
-    getIt<WeatherApi>(),
+  // app repository:----------------------------------------------------------------
+  getIt.registerSingleton(AppRepository(
     getIt<SharedPreferenceHelper>(),
-    getIt<WeatherDataSource>(),
+  ));
+
+  // post repository:----------------------------------------------------------------
+  getIt.registerSingleton(PostRepository(
+    getIt<PostApi>(),
+    getIt<SharedPreferenceHelper>(),
+    getIt<PostDataSource>(),
   ));
 
   // task repository:----------------------------------------------------------------
@@ -60,10 +66,10 @@ Future<void> setupLocator() async {
   ));
 
   // stores:--------------------------------------------------------------------
-  getIt.registerSingleton(LanguageStore(getIt<Repository>()));
+  getIt.registerSingleton(LanguageStore(getIt<AppRepository>()));
 
   // getIt.registerSingleton(WeatherBloc());
  // getIt.registerSingleton(PostStore(getIt<Repository>()));
-  getIt.registerSingleton(ThemeStore(getIt<Repository>()));
+  getIt.registerSingleton(ThemeStore(getIt<AppRepository>()));
 
 }

@@ -1,5 +1,3 @@
-import 'package:morphosis_flutter_demo/constants/colors.dart';
-import 'package:morphosis_flutter_demo/constants/font_family.dart';
 /**
  * Creating custom color palettes is part of creating a custom app. The idea is to create
  * your class of custom colors, in this case `CompanyColors` and then create a `ThemeData`
@@ -22,8 +20,9 @@ import 'package:morphosis_flutter_demo/constants/font_family.dart';
  * `import` this file in your project, anywhere you needed it.
  * `import 'path/to/theme.dart';`
  */
-
 import 'package:flutter/material.dart';
+import 'package:morphosis_flutter_demo/constants/colors.dart';
+import 'package:morphosis_flutter_demo/constants/font_family.dart';
 
 final ThemeData themeData = new ThemeData(
     fontFamily: FontFamily.productSans,
@@ -31,8 +30,10 @@ final ThemeData themeData = new ThemeData(
     primaryColor: AppColors.primaryColor,
     primaryColorBrightness: Brightness.light,
     accentColor: AppColors.primaryColor,
-    accentColorBrightness: Brightness.light
-);
+    accentColorBrightness: Brightness.light,
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: AppColors.whiteColor)
+    ));
 
 final ThemeData themeDataDark = ThemeData(
   fontFamily: FontFamily.productSans,

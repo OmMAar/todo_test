@@ -1,4 +1,4 @@
-import 'package:morphosis_flutter_demo/data/repository.dart';
+import 'package:morphosis_flutter_demo/data/app_repository.dart';
 import 'package:morphosis_flutter_demo/models/language/Language.dart';
 import 'package:morphosis_flutter_demo/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
@@ -11,7 +11,7 @@ abstract class _LanguageStore with Store {
   static const String TAG = "LanguageStore";
 
   // repository instance
-  final Repository _repository;
+  final AppRepository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -24,7 +24,7 @@ abstract class _LanguageStore with Store {
   ];
 
   // constructor:---------------------------------------------------------------
-  _LanguageStore(Repository repository)
+  _LanguageStore(AppRepository repository)
       : this._repository = repository {
     init();
   }

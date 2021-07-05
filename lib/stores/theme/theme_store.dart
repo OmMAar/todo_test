@@ -1,4 +1,4 @@
-import 'package:morphosis_flutter_demo/data/repository.dart';
+import 'package:morphosis_flutter_demo/data/app_repository.dart';
 import 'package:morphosis_flutter_demo/stores/error/error_store.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -11,7 +11,7 @@ abstract class _ThemeStore with Store {
   final String TAG = "_ThemeStore";
 
   // repository instance
-  final Repository _repository;
+  final AppRepository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -25,7 +25,7 @@ abstract class _ThemeStore with Store {
   bool get darkMode => _darkMode;
 
   // constructor:---------------------------------------------------------------
-  _ThemeStore(Repository repository)
+  _ThemeStore(AppRepository repository)
       : this._repository = repository {
     init();
   }

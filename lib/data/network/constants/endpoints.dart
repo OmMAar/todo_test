@@ -2,7 +2,7 @@ class Endpoints {
   Endpoints._();
 
   // base url
-  static const String baseUrl = "http://api.openweathermap.org";
+  static const String baseUrl = "https://jsonplaceholder.typicode.com";
 
   // receiveTimeout
   static const int receiveTimeout = 15000;
@@ -12,8 +12,4 @@ class Endpoints {
 
   // booking endpoints
   static const String getPosts = baseUrl + "/posts";
-
-
-
-  static const String weatherInfoUrl = baseUrl + "/data/2.5/forecast";
 }

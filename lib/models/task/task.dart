@@ -10,7 +10,7 @@ class Task {
   late String title;
   late String description;
   @JsonKey(name: 'completed_at')
-   DateTime? completedAt = null;
+   DateTime? completedAt;
 
   bool get isNew {
     return id == null;

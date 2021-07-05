@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:morphosis_flutter_demo/models/task/task.dart';
 
@@ -23,12 +22,20 @@ class FirebaseManager {
       FirebaseFirestore.instance.collection('tasks_2');
 
 
+
+
+  //TODO: replace mock data. Remember to set the task id to the firebase object id
+  List<Task> get tasks => mockData.map((t) => Task.fromJson(t)).toList();
+
+  /// fetch tasks
   Stream<QuerySnapshot> readItems() {
     return tasksRef.snapshots();
   }
 
-  //TODO: replace mock data. Remember to set the task id to the firebase object id
-  List<Task> get tasks => mockData.map((t) => Task.fromJson(t)).toList();
+  /// fetch completed tasks
+  Stream<QuerySnapshot> fetchCompletedItems() {
+    return tasksRef.where("completed_at", isNotEqualTo: null).snapshots();
+  }
 
   //TODO: implement firestore CRUD functions here
   Future addTask(Task task) async{
@@ -42,6 +49,46 @@ class FirebaseManager {
      // tasksRef.doc(generatedID.id).set(task);
 
       await tasksRef.doc(generatedID.id).set(task.toJson());
+
+
+    }catch(e){
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+
+  Future editTask(Task task) async{
+    try{
+
+
+      print(tasksRef.path);
+
+
+      await tasksRef.doc(task.id).set(task.toJson());
+
+
+    }catch(e){
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
+
+
+  Future deleteTask(String id) async{
+    try{
+
+
+      print(tasksRef.path);
+
+
+      await tasksRef.doc(id).delete();
 
 
     }catch(e){

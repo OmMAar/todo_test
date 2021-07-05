@@ -23,5 +23,29 @@ class TaskFireStore {
     }
   }
 
+  /// edit task
+  Future editTask({required Task task})async {
+    var result = await getIt<FirebaseManager>().editTask(task);
+
+
+    if (result is String){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  /// delete task
+  Future deleteTask({required String id})async {
+    var result = await getIt<FirebaseManager>().deleteTask(id);
+
+
+    if (result is String){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
 
 }

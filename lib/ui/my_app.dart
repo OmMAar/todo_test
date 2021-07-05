@@ -1,6 +1,7 @@
 import 'package:morphosis_flutter_demo/constants/app_theme.dart';
 import 'package:morphosis_flutter_demo/constants/strings.dart';
-import 'package:morphosis_flutter_demo/data/repository.dart';
+import 'package:morphosis_flutter_demo/data/app_repository.dart';
+import 'package:morphosis_flutter_demo/data/post_repository.dart';
 import 'package:morphosis_flutter_demo/di/components/service_locator.dart';
 import 'package:morphosis_flutter_demo/ui/splash/splash.dart';
 import 'package:morphosis_flutter_demo/utils/routes/routes.dart';
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   // Create your store as a final variable in a base Widget. This works better
   // with Hot Reload than creating it directly in the `build` function.
-  final ThemeStore _themeStore = ThemeStore(getIt<Repository>());
-  final LanguageStore _languageStore = LanguageStore(getIt<Repository>());
+  final ThemeStore _themeStore = ThemeStore(getIt<AppRepository>());
+  final LanguageStore _languageStore = LanguageStore(getIt<AppRepository>());
 
 
   @override

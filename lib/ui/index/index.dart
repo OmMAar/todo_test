@@ -24,12 +24,13 @@ class _IndexPageState extends State<IndexPage> {
       HomePage(),
       TasksPage(
         title: 'All Tasks',
-        tasks: getIt<FirebaseManager>().tasks,
+        stream: getIt<FirebaseManager>().readItems(),
+        // tasks: getIt<FirebaseManager>().tasks,
       ),
       TasksPage(
         title: 'Completed Tasks',
-        tasks:
-        getIt<FirebaseManager>().tasks.where((t) => t.isCompleted).toList(),
+        stream: getIt<FirebaseManager>().fetchCompletedItems(),
+        //tasks: getIt<FirebaseManager>().tasks.where((t) => t.isCompleted).toList(),
       )
     ];
 

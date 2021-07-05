@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:morphosis_flutter_demo/models/weather/weather_forecast_list_response.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,44 +51,5 @@ class SharedPreferenceHelper {
 
   Future<void> changeLanguage(String language) {
     return _sharedPreference.setString(Preferences.current_language, language);
-  }
-
-
-  // save response for one in day
-  Future<bool> saveWeather(WeatherForecastListResponse response) async {
-    return _sharedPreference.setString(Preferences.weatherResponse, jsonEncode(response.toJson()));
-  }
-
-  Future<WeatherForecastListResponse?> getWeather() async {
-    try {
-      String jsonData = _sharedPreference.getString(Preferences.weatherResponse)!;
-      if (jsonData != null) {
-        return WeatherForecastListResponse.fromJson(jsonDecode(jsonData));
-      } else {
-        return null;
-      }
-    } catch (exc, stackTrace) {
-      return null;
-    }
-  }
-
-  Future<DateTime?> get currentFetchingTime async {
-    try {
-      String jsonData = _sharedPreference.getString(Preferences.fetchInfoTime)!;
-      if (jsonData != null) {
-        DateTime tempDate =
-        new DateFormat("yyyy-MM-dd hh:mm:ss").parse(jsonData);
-        return tempDate;
-      } else {
-        return null;
-      }
-    } catch (exc, stackTrace) {
-      return null;
-    }
-  }
-
-  Future<void> saveFetchingTime() async {
-    String date = DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now());
-    _sharedPreference.setString(Preferences.fetchInfoTime, date);
   }
 }
