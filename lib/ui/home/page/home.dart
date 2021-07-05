@@ -185,11 +185,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin , Aut
   Widget _buildErrorWidget(String error, PostFailure state) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-          child: error ==
-                  'Connection to API server failed due to internet connection'
-              ? NetworkError(onPressed: () => _bloc.add(GetPostEvent()))
-              : UnexpectedError()),
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: Center(
+            child: error ==
+                    'Connection to API server failed due to internet connection'
+                ? NetworkError(onPressed: () => _bloc.add(GetPostEvent()))
+                : UnexpectedError()),
+      ),
     );
   }
 
